@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>worm AI - Login</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+    <style>
+:root {
+            --primary-color: #8a2be2;
+            --primary-dark: #7b2cbf;
+            --primary-light: #9d4edd;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --success-color: #10b981;
+            --error-color: #ef4444;
+        }
+
+        .dark-mode {
+            --primary-color: #9d4edd;
+            --primary-dark: #8a2be2;
+            --primary-light: #b185db;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f1f5f9;
+            --text-light: #cbd5e1;
+            --border-color: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://files.catbox.moe/4zrnsf.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .dark-mode::before {
+            opacity: 0.1;
+        }
+
+        .login-container {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 420px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.75rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+            transform: translateY(-1px);
+        }
+
+        input::placeholder {
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.875rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .toggle-text {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .toggle-link {
+            color: var(--primary-color);
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .toggle-link:hover {
+            color: var(--primary-dark);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.25rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow);
+        }
+
+        .message {
+            padding: 0.875rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-message {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--error-color);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .success-message {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+            }
+            
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+
+    <div class="login-container">
+        <div class="logo">
+            <div class="logo-icon">E</div>
+            <div class="logo-text">worm AI</div>
+        </div>
+
+        <div id="errorMessage" class="message error-message hidden"></div>
+        <div id="successMessage" class="message success-message hidden"></div>
+        <div id="warningMessage" class="message warning-message hidden"></div>
+
+        <!-- Login Form -->
+        <div id="loginForm">
+            <div class="form-group">
+                <label for="loginUsername">Username</label>
+                <input type="text" id="loginUsername" placeholder="Masukkan username Anda" autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Masukkan password Anda" autocomplete="current-password">
+            </div>
+            <button class="btn btn-primary" id="loginButton" onclick="login()">
+                <span>Masuk</span>
+            </button>
+            <div class="toggle-text">
+                Belum punya akun? <span class="toggle-link" onclick="showRegister()">Daftar di sini</span>
+            </div>
+        </div>
+
+        <!-- Register Form -->
+        <div id="registerForm" class="hidden">
+            <div class="form-group">
+                <label for="registerUsername">Buat Username</label>
+                <input type="text" id="registerUsername" placeholder="Pilih username (min. 3 karakter)" autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Buat Password</label>
+                <input type="password" id="registerPassword" placeholder="Buat password (min. 6 karakter)" autocomplete="new-password">
+            </div>
+            <button class="btn btn-primary" id="registerButton" onclick="register()">
+                <span>Daftar</span>
+            </button>
+            <div class="toggle-text">
+                Sudah punya akun? <span class="toggle-link" onclick="showLogin()">Masuk di sini</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Session management
+        let currentSessionId = localStorage.getItem('sessionId');
+        
+        // Check if user is already logged in
+        checkAuthStatus();
+        checkDatabaseStatus();
+
+        // Theme toggle
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            this.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+
+        // Load saved theme
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('themeToggle').textContent = '☀️';
+        }
+
+        function showMessage(elementId, message, isError = true) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            if (isError) {
+                element.className = 'message error-message';
+            } else {
+                element.className = 'message success-message';
+            }
+            element.classList.remove('hidden');
+            
+            setTimeout(() => {
+                element.classList.add('hidden');
+            }, 5000);
+        }
+
+        function showWarning(message) {
+            const element = document.getElementById('warningMessage');
+            element.textContent = message;
+            element.className = 'message warning-message';
+            element.classList.remove('hidden');
+        }
+
+        function showRegister() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+            clearMessages();
+            document.getElementById('registerUsername').focus();
+        }
+
+        function showLogin() {
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('loginForm').classList.remove('hidden');
+            clearMessages();
+            document.getElementById('loginUsername').focus();
+        }
+
+        function clearMessages() {
+            document.getElementById('errorMessage').classList.add('hidden');
+            document.getElementById('successMessage').classList.add('hidden');
+            document.getElementById('warningMessage').classList.add('hidden');
+        }
+
+        function setLoading(button, isLoading) {
+            if (isLoading) {
+                button.classList.add('loading');
+                button.innerHTML = '<div class="spinner"></div><span>Memproses...</span>';
+                button.disabled = true;
+            } else {
+                button.classList.remove('loading');
+                button.innerHTML = '<span>' + (button.id === 'loginButton' ? 'Masuk' : 'Daftar') + '</span>';
+                button.disabled = false;
+            }
+        }
+
+        async function checkDatabaseStatus() {
+            try {
+                const response = await fetch('/api/db-status');
+                const data = await response.json();
+                
+                if (!data.database) {
+                    showWarning('⚠️ Database tidak terhubung. Mode session-based aktif.');
+                }
+            } catch (error) {
+                console.error('Database status check error:', error);
+                showWarning('⚠️ Tidak dapat terhubung ke server.');
+            }
+        }
+
+        async function checkAuthStatus() {
+            try {
+                const response = await fetch('/api/auth/status', {
+                    headers: {
+                        'Authorization': `Bearer ${currentSessionId}`
+                    }
+                });
+                const data = await response.json();
+                
+                if (data.isAuthenticated) {
+                    window.location.href = '/chat.html';
+                }
+            } catch (error) {
+                console.error('Auth check error:', error);
+            }
+        }
+
+        async function login() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const loginButton = document.getElementById('loginButton');
+
+            if (!username || !password) {
+                showMessage('errorMessage', 'Username dan password harus diisi');
+                return;
+            }
+
+            setLoading(loginButton, true);
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Save session ID to localStorage
+                    localStorage.setItem('sessionId', data.sessionId);
+                    localStorage.setItem('username', data.username);
+                    localStorage.setItem('isDeveloper', data.isDeveloper);
+                    currentSessionId = data.sessionId;
+                    
+                    showMessage('successMessage', data.message, false);
+                    setTimeout(() => {
+                        window.location.href = '/chat.html';
+                    }, 1000);
+                } else {
+                    showMessage('errorMessage', data.error);
+                }
+            } catch (error) {
+                showMessage('errorMessage', 'Terjadi kesalahan koneksi. Periksa internet Anda.');
+                console.error('Login error:', error);
+            } finally {
+                setLoading(loginButton, false);
+            }
+        }
+
+        async function register() {
+            const username = document.getElementById('registerUsername').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const registerButton = document.getElementById('registerButton');
+
+            if (!username || !password) {
+                showMessage('errorMessage', 'Username dan password harus diisi');
+                return;
+            }
+
+            if (username.length < 3) {
+                showMessage('errorMessage', 'Username minimal 3 karakter');
+                return;
+            }
+
+            if (password.length < 6) {
+                showMessage('errorMessage', 'Password minimal 6 karakter');
+                return;
+            }
+
+            setLoading(registerButton, true);
+
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Save session ID to localStorage
+                    localStorage.setItem('sessionId', data.sessionId);
+                    localStorage.setItem('username', data.username);
+                    localStorage.setItem('isDeveloper', data.isDeveloper);
+                    currentSessionId = data.sessionId;
+                    
+                    showMessage('successMessage', data.message, false);
+                    setTimeout(() => {
+                        window.location.href = '/chat.html';
+                    }, 1000);
+                } else {
+                    showMessage('errorMessage', data.error);
+                }
+            } catch (error) {
+                showMessage('errorMessage', 'Terjadi kesalahan koneksi. Periksa internet Anda.');
+                console.error('Register error:', error);
+            } finally {
+                setLoading(registerButton, false);
+            }
+        }
+
+        // Allow form submission with Enter key
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                if (!document.getElementById('loginForm').classList.contains('hidden')) {
+                    login();
+                } else {
+                    register();
+                }
+            }
+        });
+
+        // Auto-focus on username field
+        document.getElementById('loginUsername').focus();
+    </script>
+</body>
+</html>
