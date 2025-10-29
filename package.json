@@ -1,0 +1,25 @@
+{
+  "name": "elaina-ai-mongodb",
+  "version": "1.0.0",
+  "description": "Elaina AI Assistant dengan MongoDB Authentication",
+  "license": "ISC",
+  "author": "alwayslanz",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongodb": "^6.10.0",
+    "bcryptjs": "^2.4.3",
+    "express-session": "^1.18.1",
+    "cookie-parser": "^1.4.7"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
